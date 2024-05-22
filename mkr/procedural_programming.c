@@ -121,7 +121,7 @@ void printTransitionMatrix(int **transitionMatrix, int alphabetPower) {
 int main() {
     srand(time(NULL));
 
-    const char *filename = "/Users/nazarodemchuk/Desktop/l/column_D.csv"; // Оновіть шлях до файлу
+    const char *filename = "/Users/nazarodemchuk/Desktop/l/column_D.csv"; 
     double *fileNumericSeries;
     int fileSize = readNumericSeriesFromFile(filename, &fileNumericSeries);
 
@@ -129,7 +129,7 @@ int main() {
         return 1;
     }
 
-    double initialNumericSeries[] = {0.5, 0.9, 0.1, 0.3, 0.4, 0.6, 0.7, 0.2, 0.8, 0.0};
+    double initialNumericSeries[] = {};
     int initialSize = sizeof(initialNumericSeries) / sizeof(initialNumericSeries[0]);
 
     int totalSize = initialSize + fileSize;
