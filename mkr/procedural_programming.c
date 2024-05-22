@@ -153,10 +153,25 @@ int main() {
 
     defineUniformIntervals(intervals, min, max, alphabetPower);
     sortArray(numericSeries, totalSize);
+    
+    // Measure time for generating linguistic series
+    clock_t startSeries = clock();
     convertToLinguisticSeries(linguisticSeries, numericSeries, intervals, totalSize, alphabetPower);
+    clock_t endSeries = clock();
+    double timeSeries = (double)(endSeries - startSeries) / CLOCKS_PER_SEC * 1000.0;
+    
     printLinguisticSeries(linguisticSeries, totalSize);
+    
+    // Measure time for building transition matrix
+    clock_t startMatrix = clock();
     buildTransitionMatrix(transitionMatrix, linguisticSeries, totalSize, alphabetPower);
+    clock_t endMatrix = clock();
+    double timeMatrix = (double)(endMatrix - startMatrix) / CLOCKS_PER_SEC * 1000.0;
+    
     printTransitionMatrix(transitionMatrix, alphabetPower);
+
+    printf("Time to generate linguistic series: %.2f ms\n", timeSeries);
+    printf("Time to build transition matrix: %.2f ms\n", timeMatrix);
 
     for (int i = 0; i < alphabetPower; i++) {
         free(transitionMatrix[i]);
