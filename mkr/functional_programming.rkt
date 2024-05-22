@@ -3,7 +3,8 @@
 (require racket/math
          racket/list
          racket/path
-         racket/file)
+         racket/file
+         racket/date)
 
 ; Функція для сортування списку
 (define (sort-list lst)
@@ -78,9 +79,21 @@
   (define alphabet-power 26) ; Ступінь алфавіту (A-Z)
   (define sorted-numeric-series (sort-list numeric-series)) ; Відсортований числовий ряд
   (define intervals (define-intervals sorted-numeric-series alphabet-power)) ; Інтервали
+  
+  ; Measure time for generating linguistic series
+  (define start-series (current-inexact-milliseconds))
   (define linguistic-series (convert-to-linguistic-series sorted-numeric-series intervals)) ; Лінгвістичний ряд
+  (define end-series (current-inexact-milliseconds))
+  (define time-series (- end-series start-series))
   (print-linguistic-series linguistic-series)
+  (printf "Time to generate linguistic series: ~a ms\n" time-series)
+  
+  ; Measure time for building transition matrix
+  (define start-matrix (current-inexact-milliseconds))
   (define linguistic-matrix (build-linguistic-matrix linguistic-series)) ; Побудова матриці
-  (print-linguistic-matrix linguistic-matrix)) ; Виведення матриці
+  (define end-matrix (current-inexact-milliseconds))
+  (define time-matrix (- end-matrix start-matrix))
+  (print-linguistic-matrix linguistic-matrix)
+  (printf "Time to build transition matrix: ~a ms\n" time-matrix))
 
 (main)
