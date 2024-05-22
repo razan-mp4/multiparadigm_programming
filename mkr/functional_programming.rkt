@@ -52,7 +52,7 @@
 
 ; Функція для виведення матриці
 (define (print-linguistic-matrix matrix)
-  (printf "Лінгвістична матриця:\n")
+  (printf "Матриця передування:\n")
   (for ([row (in-list matrix)])
     (printf "~a\n" (string-join (map number->string row) " "))))
 
